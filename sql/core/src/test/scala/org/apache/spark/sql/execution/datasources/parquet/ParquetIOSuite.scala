@@ -1196,6 +1196,15 @@ class ParquetIOSuite extends QueryTest with ParquetTest with SharedSparkSession 
       }
     }
   }
+
+  test("SPARK-34167: read Decimals with precision < 10 written as 64-bit") {
+    readParquetFile(testFile("test-data/decimal32-written-as-64-bit.snappy.parquet")) { df =>
+      assert(10 == df.collect().length)
+    }
+    readParquetFile(testFile("test-data/decimal32-written-as-64-bit-dict.snappy.parquet")) { df =>
+      assert(2048 == df.collect().length)
+    }
+  }
 }
 
 class JobCommitFailureParquetOutputCommitter(outputPath: Path, context: TaskAttemptContext)
