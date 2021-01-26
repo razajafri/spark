@@ -570,8 +570,8 @@ public class VectorizedColumnReader {
     if (column.dataType() == DataTypes.LongType ||
         DecimalType.is64BitDecimalType(column.dataType())) {
       defColumn.readLongs(
-          num, column, rowId, maxDefLevel, (VectorizedValuesReader) dataColumn,
-          DecimalType.is32BitDecimalType(column.dataType()));
+        num, column, rowId, maxDefLevel, (VectorizedValuesReader) dataColumn,
+        DecimalType.is32BitDecimalType(column.dataType()));
     } else if (originalType == OriginalType.TIMESTAMP_MICROS) {
       if ("CORRECTED".equals(datetimeRebaseMode)) {
         defColumn.readLongs(
